@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <p>Access token value: <span >{{accessToken}}</span></p>
+    <p>Scope value: <span>{{ scope }}</span></p>
+    <p>Refresh token: <span>{{ refreshToken }}</span></p>
+    <a href="{{endpoint}}">Get OAuth Token</a>
+</div>
+{% endblock %}
