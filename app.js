@@ -8,7 +8,7 @@ const home = require('./server/home');
 
 const callback = require('./server/callback');
 
-const appName = 'OAuth2.0 Client';
+const appName = 'OAuth2.0 Web Client';
 
 debug('booting %s', appName);
 
