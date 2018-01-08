@@ -11,15 +11,9 @@ exports.token = {
   refresh_token: null
 };
 
-exports.authServer = {
-  authorize: 'http://localhost:9001/oauth/authorize',
-  token: 'http://localhost:9001/oauth/access_token'
-};
-
 exports.endpoints = {
-  authorize: 'http://localhost:9001/oauth/authorize',
-  accessToken: 'http://localhost:9001/oauth/access_token'
+  authorize: 'http://localhost:9001/authorize',
+  accessToken: 'http://localhost:9001/token'
 };
-
 
 exports.states = new Map();

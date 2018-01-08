@@ -1,5 +1,6 @@
 const debug = require('debug')('oauth:index');
 const path = require('path');
+const static = require('koa-static');
 const Koa = require('koa');
 const Router = require('koa-router');
 const logger = require('koa-logger');
@@ -16,6 +17,7 @@ const app = new Koa();
 const router = new Router();
 
 app.use(logger());
+app.use(static(path.resolve(process.cwd(), 'node_modules')));
 
 router.use('/', home);
 router.use('/callback', callback);

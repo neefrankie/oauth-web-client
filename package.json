@@ -17,11 +17,13 @@
   },
   "homepage": "https://github.com/neefrankie/oauth-web-client#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "chance": "^1.0.13",
     "debug": "^3.1.0",
     "koa": "^2.4.1",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
+    "koa-static": "^4.0.2",
     "node-fetch": "^1.7.3",
     "nunjucks": "^3.0.1"
   }
