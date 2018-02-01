@@ -7,12 +7,13 @@ const logger = require('koa-logger');
 const home = require('./server/home');
 
 const callback = require('./server/callback');
+const authorization = require('./server/authorization');
 
 const appName = 'OAuth2.0 Web Client';
 
 debug('booting %s', appName);
 
-const port = 9000;
+const port = 3000;
 const app = new Koa();
 const router = new Router();
 
@@ -21,6 +22,7 @@ app.use(static(path.resolve(process.cwd(), 'node_modules')));
 
 router.use('/', home);
 router.use('/callback', callback);
+router.use('/authorization', authorization);
 
 app.use(router.routes());
 

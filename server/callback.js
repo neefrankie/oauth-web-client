@@ -2,7 +2,7 @@ const debug = require('debug')('oauth:callback');
 const qs = require('querystring');
 const Koa = require('koa');
 const Router = require('koa-router');
-const fetch = require('node-fetch');
+const request = require('superagent');
 const authHeader = require('../utils/auth-header');
 const {client, states, endpoints} = require('./config');
 const router = new Router();
@@ -47,7 +47,7 @@ router.get("/", async function(ctx, next) {
     code: sessionCode,
     redirect_uri: client.redirect_uri
   });
-  
+
   const tokenRes = await fetch(endpoints.accessToken, {
     method: 'POST',
     headers: headers,

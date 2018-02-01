@@ -8,9 +8,8 @@ const {URL, URLSearchParams} = require('url');
  */
 function buildUrl (base, params, hash) {
   const newUrl = new URL(base);
-  for (const [key, value] of Object.entries(params)) {
-    newUrl.searchParams.append(key, value)
-  } 
+  const search = new URLSearchParams(params);
+  newUrl.search = search.toString();
   if (hash) {
     newUrl.hash = hash;
   }
@@ -21,7 +20,7 @@ if (require.main == module) {
   console.log(buildUrl(
     'http://localhost:9000',
     {
-      foo: 'bar',
+      foo: 'bar baz',
       baz: 42
     }
   ));

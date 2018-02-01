@@ -1,8 +1,8 @@
 exports.client = {
-  client_id: '245c0b3c9ee39b049ee4',
-  client_secret: 'f78c369658cfda5f14a323fec87854c4d2446fd8',
-  redirect_uri: "http://localhost:9000/callback",
-  scope: "read write delete"
+  client_id: 'fbaaaef1100071a85fea',
+  client_secret: '482e234b180129b5a4553af5441eb51b0616950c',
+  redirect_uri: "http://localhost:3000/callback",
+  scope: "article user"
 };
 
 exports.token = {
@@ -12,8 +12,8 @@ exports.token = {
 };
 
 exports.endpoints = {
-  authorize: 'http://localhost:9001/authorize',
-  accessToken: 'http://localhost:9001/token'
+  authorize: 'http://localhost:9000/authorize',
+  token: 'http://localhost:9000/token'
 };
 
 exports.states = new Map();

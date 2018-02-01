@@ -1,10 +1,24 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="jumbotron">
-    <p>Access token value: <span class="label label-danger">{{accessToken}}</span></p>
-    <p>Scope value: <span class="label label-danger">{{ scope }}</span></p>
-    <p>Refresh token: <span class="label label-danger">{{ refreshToken }}</span></p>
-    <a class="btn btn-primary" href="{{endpoint}}">Get OAuth Token</a>
+<div class="col-sm-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Authorization Code
+    </div>
+    <div class="panel-body">
+      <a href="/authorization" class="btn btn-primary btn-lg">Authorizaiton work flow</a>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Implicit Grant
+    </div>
+    <div class="panel-body">
+      <a href="/implicit" class="btn btn-primary btn-lg">Implicit Grant</a>
+    </div>
+  </div>
 </div>
 {% endblock %}
