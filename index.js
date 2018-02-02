@@ -19,6 +19,7 @@ const router = new Router();
 
 app.use(logger());
 app.use(static(path.resolve(process.cwd(), 'node_modules')));
+app.use(static(path.resolve(process.cwd(), 'client')));
 
 router.use('/', home);
 router.use('/callback', callback);

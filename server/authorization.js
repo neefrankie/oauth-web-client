@@ -12,12 +12,15 @@ router.get('/', async (ctx, next) => {
 
   states.set(state, Date.now());
 
-  const redirectTo = buildUrl(endpoints.authorize, {
-    response_type: 'code',
-    client_id: client.client_id,
-    redirect_uri: client.redirect_uri,
-    state,
-    scope: client.scope
+  const redirectTo = buildUrl({
+    base: endpoints.authorize,
+    params: {
+      response_type: 'code',
+      client_id: client.client_id,
+      redirect_uri: client.redirect_uri,
+      state,
+      scope: client.scope
+    }
   });
 
   debug('Redirect to: %s', redirectTo);

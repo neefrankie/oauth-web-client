@@ -1,24 +1,28 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="col-sm-6">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      Authorization Code
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <a href="/authorization" class="btn btn-primary">Authorization Code</a>
+        </h5>
+
+      </div>
     </div>
-    <div class="panel-body">
-      <a href="/authorization" class="btn btn-primary btn-lg">Authorizaiton work flow</a>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <button type="button" name="button" class="btn btn-primary" id="implicit-grant">Implicit Grant</button>
+        </h5>
+
+      </div>
     </div>
   </div>
 </div>
-<div class="col-sm-6">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      Implicit Grant
-    </div>
-    <div class="panel-body">
-      <a href="/implicit" class="btn btn-primary btn-lg">Implicit Grant</a>
-    </div>
-  </div>
-</div>
+
 {% endblock %}

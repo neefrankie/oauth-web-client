@@ -2,8 +2,8 @@ const debug = require('debug')('oauth:callback');
 const qs = require('querystring');
 const Koa = require('koa');
 const Router = require('koa-router');
-const request = require('superagent');
-const authHeader = require('../utils/auth-header');
+const got = require('got');
+const render = require('../utils/render');
 const {client, states, endpoints} = require('./config');
 const router = new Router();
 
@@ -22,47 +22,37 @@ router.get("/", async function(ctx, next) {
   debug('Query: %O', query);
 
   if (query.error) {
-    ctx.body = query;
-    return;
+    return ctx.body = {
+      error: query.error
+    };
   }
 
   if (!states.delete(query.state)) {
-    ctx.body = {
+    return ctx.body = {
       error: 'state does not match'
     };
-    return;
   }
 
-  const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Authorization': `Basic ${authHeader.encode(client.client_id, client.client_secret)}`,
-    'Accept': 'application/json'
-  };
-  debug('Request oauth header: ', headers);
+  debug('Requesting to token endpoint...');
+  const resp = await got(endpoints.token, {
+    form: true,
+    json: true,
+    auth: `${client.client_id}:${client.client_secret}`,
+    body: {
+      grant_type: 'authorization_code',
+      code: query.code,
+      redirect_uri: client.redirect_uri
+    }
+  })
 
-  const sessionCode = ctx.query.code;
+  debug('Token response: %O', resp);
 
-  const formData = qs.stringify({
-    grant_type: 'authorization_code',
-    code: sessionCode,
-    redirect_uri: client.redirect_uri
-  });
-
-  const tokenRes = await fetch(endpoints.accessToken, {
-    method: 'POST',
-    headers: headers,
-    body: formData,
-  });
-
-  // If /oauth response has problems, stop.
-  if (tokenRes.status >= 300) {
-    ctx.body = {
-      error: tokenRes.status
-    };
-    return;
+  if (resp.statusCode > 300) {
+    ctx.status = resp.status;
+    return ctx.body = resp.body.error;
   }
 
-  return ctx.body = await tokenRes.json();
+  ctx.body = resp.body;
 });
 
 module.exports = router.routes();
