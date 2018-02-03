@@ -1,3 +1,19 @@
+body {
+    background-color: #252830;
+}
 .main {
     padding-top: 40px;
+}
+.list-group {
+
+}
+.list-group-item {
+    color: #cfd2da;
+    background-color: #252830;
+    border: 1px solid #434857;
+}
+
+.list-group-item:hover {
+    background-color: #434857;
+    color: #fff;
 }

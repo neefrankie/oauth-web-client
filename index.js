@@ -8,6 +8,7 @@ const home = require('./server/home');
 
 const callback = require('./server/callback');
 const authorization = require('./server/authorization');
+const jwt = require('./server/jwt');
 
 const appName = 'OAuth2.0 Web Client';
 
@@ -24,6 +25,7 @@ app.use(static(path.resolve(process.cwd(), 'client')));
 router.use('/', home);
 router.use('/callback', callback);
 router.use('/authorization', authorization);
+router.use('/jwt', jwt);
 
 app.use(router.routes());
 

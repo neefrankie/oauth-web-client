@@ -1,28 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">
-          <a href="/authorization" class="btn btn-primary">Authorization Code</a>
-        </h5>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">
-          <button type="button" name="button" class="btn btn-primary" id="implicit-grant">Implicit Grant</button>
-        </h5>
-
-      </div>
-    </div>
-  </div>
+<div class="list-group">
+    <a href="/authorization" class="list-group-item list-group-item-action">Authorization Code</a>
+    <button type="button" class="list-group-item list-group-item-action" id="implicit-grant">Implicit Grant</button>
+    <a href="/jwt" class="list-group-item list-group-item-action">JSON Web Token</a>
 </div>
 
 {% endblock %}
