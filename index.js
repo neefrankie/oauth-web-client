@@ -9,6 +9,7 @@ const home = require('./server/home');
 const callback = require('./server/callback');
 const authorization = require('./server/authorization');
 const jwt = require('./server/jwt');
+const github = require('./server/github');
 
 const appName = 'OAuth2.0 Web Client';
 

@@ -3,7 +3,7 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const render = require('../../utils/render');
 const randStr = require('../../utils/rand-str');
-const buildUrl = require('../utils/build-url');
+const buildUrl = require('../../utils/build-url');
 const client = require('./client');
 const {states} = require('../config');
 

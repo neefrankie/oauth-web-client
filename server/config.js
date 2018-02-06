@@ -12,8 +12,8 @@ exports.token = {
 };
 
 exports.endpoints = {
-  authorize: 'http://localhost:9000/authorize',
-  token: 'http://localhost:9000/token'
+  authorize: 'http://localhost:9001/authorize',
+  token: 'http://localhost:9001/token'
 };
 
 exports.states = new Map();
