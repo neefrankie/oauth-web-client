@@ -26,6 +26,7 @@ router.use('/', home);
 router.use('/callback', callback);
 router.use('/authorization', authorization);
 router.use('/jwt', jwt);
+router.use('/github', github);
 
 app.use(router.routes());
 
