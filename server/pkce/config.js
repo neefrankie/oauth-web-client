@@ -1,6 +1,6 @@
 exports.client = {
-  client_id: 'fbaaaef1100071a85fea',
-  client_secret: '482e234b180129b5a4553af5441eb51b0616950c',
+  client_id: '3f25c39435a18218fb87',
+  client_secret: '06894d8432f6ba4e17907fe5112e019e515b3f3a',
   redirect_uri: "http://localhost:3000/pkce/callback",
   scope: "article user"
 };
