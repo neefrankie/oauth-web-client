@@ -26,12 +26,51 @@
         After success, the authorizzation server will redirect you back to `redirect_uri` with `code` and `state` query.
 
         ##### Post to `/token`
-        Authorization: Basic {client_id}:{client_secret}
+        Set header `Authorization: Basic {client_id}:{client_secret}` and `Content-Type: application/x-www-form-urlencoded`.
+
         * `grant_type=authorization_code`
         * `code=xxxxx`
         * `redirect_uri`
+
         {% endmarkdown %}
-        <a href="/authorization" class="btn btn-primary">Try</a>
+        <a href="/authorize" class="btn btn-primary">Try</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        PKCE for Native App
+      </div>
+      <div class="card-body">
+        {% markdown %}
+        ##### Request to `/authorize`
+        * `response_type=code`
+        * `client_id=xxxxxx`
+        * `redirect_uri=xxxxxxx`
+        * `scope=xxxxxxx`
+        * `state=xxxxxxx`
+        * `code_challenge=xxxxxxxxxxx`
+        * `code_challenge_method=plain | S256`
+
+        ##### Generate `code_challenge`:
+        1. The client should first create a **code verifier**, which is a cryptographically random string using the the characters `A-Za-z0-9-._~`, between **43 and 128** characters long.
+        2. Use the code verifier to create a **code challenge**. For devices that can perform a SHA256 hash, hash the coder verifier, and then base64-url-encode the hash value. Clients that do not have the ability to perform a SHA256 hash are permitttedto use the plain code verifier string as the challenge.
+        3. `code_challenge` is `S256` if the client could permform SHA256 hash, otherwise `plain`.
+
+        ##### Authorization Code Exchange
+
+        Post to `/token` with header `Authorization: Basic {client_id}:{client_secret}`
+        * `grant_type=authorization_code`
+        * `code`
+        * `redirect_uri`
+        * `client_id`
+        * `code_verifier`
+
+        {% endmarkdown %}
+
+        <a href="/pkce/authorize" class="btn btn-primary">Try</a>
       </div>
     </div>
   </div>

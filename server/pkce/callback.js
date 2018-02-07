@@ -1,9 +1,8 @@
-const debug = require('debug')('oauth:callback');
+const debug = require('debug')('oauth:pkce-callback');
 const qs = require('querystring');
 const Koa = require('koa');
 const Router = require('koa-router');
 const got = require('got');
-const render = require('../utils/render');
 const {client, states, endpoints} = require('./config');
 const router = new Router();
 
@@ -27,9 +26,11 @@ router.get("/", async function(ctx, next) {
     };
   }
 
-  if (!states.delete(query.state)) {
+
+  const codeVerifier = states.get(query.state);
+  if (!codeVerifier) {
     return ctx.body = {
-      error: 'state does not match'
+      error: 'Code verifyer not found'
     };
   }
 
@@ -42,7 +43,8 @@ router.get("/", async function(ctx, next) {
     body: {
       grant_type: 'authorization_code',
       code: query.code,
-      redirect_uri: client.redirect_uri
+      redirect_uri: client.redirect_uri,
+      code_verifier: codeVerifier
     }
   });
 

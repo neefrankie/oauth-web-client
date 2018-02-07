@@ -10,6 +10,7 @@ const callback = require('./server/callback');
 const authorization = require('./server/authorization');
 const jwt = require('./server/jwt');
 const github = require('./server/github');
+const pkce = require('./server/pkce');
 
 const appName = 'OAuth2.0 Web Client';
 
@@ -28,6 +29,7 @@ router.use('/callback', callback);
 router.use('/authorization', authorization);
 router.use('/jwt', jwt);
 router.use('/github', github);
+router.use('/pkce', pkce);
 
 app.use(router.routes());
 

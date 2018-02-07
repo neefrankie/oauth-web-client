@@ -25,6 +25,7 @@
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
     "koa-static": "^4.0.2",
+    "lowdb": "^1.0.0",
     "marked": "^0.3.12",
     "nunjucks": "^3.0.1",
     "nunjucks-markdown": "^2.0.1",
