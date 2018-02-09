@@ -30,5 +30,8 @@
     "nunjucks": "^3.0.1",
     "nunjucks-markdown": "^2.0.1",
     "popper.js": "^1.12.9"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0"
   }
 }

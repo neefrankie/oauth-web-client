@@ -5,6 +5,7 @@
   ],
   "env": {
     "NODE_ENV": "development",
+    "PORT": 3000,
     "DEBUG": "oauth*"
   },
   "verbose": true,

@@ -21,9 +21,7 @@ router.get("/", async function(ctx, next) {
   debug('Query: %O', query);
 
   if (query.error) {
-    return ctx.body = {
-      error: query.error
-    };
+    return ctx.body = query;
   }
 
 
@@ -39,7 +37,7 @@ router.get("/", async function(ctx, next) {
     method: 'POST',
     form: true,
     json: true,
-    auth: `${client.client_id}:${client.client_secret}`,
+    auth: `${client.client_id}`,
     body: {
       grant_type: 'authorization_code',
       code: query.code,
@@ -50,7 +48,7 @@ router.get("/", async function(ctx, next) {
 
   if (resp.statusCode > 300) {
     ctx.status = resp.status;
-    return ctx.body = resp.body.error;
+    return ctx.body = resp.body;
   }
 
   ctx.body = resp.body;

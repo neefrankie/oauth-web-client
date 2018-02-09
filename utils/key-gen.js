@@ -11,7 +11,7 @@ const randomBytes = util.promisify(crypto.randomBytes);
  * @return {string}     the length or returned string is 2 * len
  */
 async function keyGen(len=20, encoding='hex') {
-  buf = await randomBytes(len)
+  const buf = await randomBytes(len)
   return buf.toString(encoding);
 }
 

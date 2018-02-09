@@ -1,6 +1,6 @@
 exports.client = {
-  client_id: 'fbaaaef1100071a85fea',
-  client_secret: '482e234b180129b5a4553af5441eb51b0616950c',
+  client_id: '1acc31b7db001aa88302',
+  client_secret: 'b367d4adfb20d21c5969e78e2318edd3a7b77ecabcf32f971ae77a55aaac7181',
   redirect_uri: "http://localhost:3000/callback",
   scope: "article user"
 };

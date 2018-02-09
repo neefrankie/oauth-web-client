@@ -1,23 +1,16 @@
-const keyGen = require('../utils/key-gen');
-const {createHash} = require('crypto');
+const test = require('ava');
+const {genVerifier, genChallenge} = require('../utils/challenge-gen');
 
-async function codeChallenge() {
-  const codeVerifier = await keyGen(40);
-  console.log('Code verfier: %s', codeVerifier);
+test('generateCodeVerifer', async t => {
+  const verifier = await genVerifier();
+  console.log('Code verifier: %s', verifier);
 
-  // 1 base64 digit represents 6 bits of data. 256 / 6 = 42 ... 4
-  const codeChallenge = createHash('sha256')
-    .update(codeVerifier)
-    .digest('base64');
-  console.log('Base64 codeChallenge: %s', codeChallenge);
+  console.log(verifier);
 
-  const hex = createHash('sha256')
-    .update(codeVerifier)
-    .digest('hex');
-  console.log('hex codeChallenge: %s', hex);
-}
+  t.is(verifier.length, 43);
 
-codeChallenge()
-  .catch(err => {
-    console.log(err);
-  });
+  const challenge = genChallenge(verifier);
+  console.log(challenge);
+
+  t.is(challenge.length, 43);
+});

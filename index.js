@@ -16,7 +16,7 @@ const appName = 'OAuth2.0 Web Client';
 
 debug('booting %s', appName);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = new Koa();
 const router = new Router();
 
