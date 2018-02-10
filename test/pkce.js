@@ -5,12 +5,10 @@ test('generateCodeVerifer', async t => {
   const verifier = await genVerifier();
   console.log('Code verifier: %s', verifier);
 
-  console.log(verifier);
-
   t.is(verifier.length, 43);
 
   const challenge = genChallenge(verifier);
-  console.log(challenge);
+  console.log('Code challenge: %s', challenge);
 
   t.is(challenge.length, 43);
 });

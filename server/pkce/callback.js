@@ -24,7 +24,6 @@ router.get("/", async function(ctx, next) {
     return ctx.body = query;
   }
 
-
   const codeVerifier = states.get(query.state);
   if (!codeVerifier) {
     return ctx.body = {
@@ -37,7 +36,7 @@ router.get("/", async function(ctx, next) {
     method: 'POST',
     form: true,
     json: true,
-    auth: `${client.client_id}`,
+    auth: `${client.client_id}:`,
     body: {
       grant_type: 'authorization_code',
       code: query.code,

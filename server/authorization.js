@@ -1,7 +1,7 @@
 const debug = require('debug')('oauth:authorization');
 const Koa = require('koa');
 const Router = require('koa-router');
-const randStr = require('../utils/rand-str');
+const randomString = require('../utils/random-string');
 const buildUrl = require('../utils/build-url');
 const {client, states, endpoints} = require('./config');
 

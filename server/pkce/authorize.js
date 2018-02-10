@@ -1,17 +1,16 @@
 const debug = require('debug')('oauth:pkce-authorize');
 const Koa = require('koa');
 const Router = require('koa-router');
-const randStr = require('../../utils/rand-str');
+const randomString = require('../../utils/random-string');
 const buildUrl = require('../../utils/build-url');
-const keyGen = require('../../utils/key-gen');
-const challengeGen = require('../../utils/challenge-gen');
+const pkce = require('../../utils/pkce');
 const {client, states, endpoints} = require('./config');
 
 const router = new Router();
 
 router.get('/', async (ctx, next) => {
-  const state = randStr();
-  const codeVerifier = await keyGen(40);
+  const state = randomString();
+  const codeVerifier = await pkce.genVerifier();
 
   states.set(state, codeVerifier);
   debug('Current state entries: %O', states);
@@ -24,7 +23,7 @@ router.get('/', async (ctx, next) => {
       redirect_uri: client.redirect_uri,
       state,
       scope: client.scope,
-      code_challenge: challengeGen(codeVerifier),
+      code_challenge: pkce.genChallenge(codeVerifier),
       code_challenge_method: 'S256'
     }
   });
