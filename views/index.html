@@ -15,25 +15,25 @@
         Authorization Code Grant
       </div>
       <div class="card-body">
-        {% markdown %}
-        ##### Request to `/authorize`
-        * `response_type=code`
-        * `client_id=xxxxxx`
-        * `redirect_uri=xxxxxxx`
-        * `scope=xxxxxxx`
-        * `state=xxxxxxx`
+{% markdown %}
+##### Request to `/authorize`
+* `response_type=code`
+* `client_id=xxxxxx`
+* `redirect_uri=xxxxxxx`
+* `scope=xxxxxxx`
+* `state=xxxxxxx`
 
-        After success, the authorizzation server will redirect you back to `redirect_uri` with `code` and `state` query.
+After success, the authorizzation server will redirect you back to `redirect_uri` with `code` and `state` query.
 
-        ##### Post to `/token`
-        Set header `Authorization: Basic {client_id}:{client_secret}` and `Content-Type: application/x-www-form-urlencoded`.
+##### Post to `/token`
+Set header `Authorization: Basic {client_id}:{client_secret}` and `Content-Type: application/x-www-form-urlencoded`.
 
-        * `grant_type=authorization_code`
-        * `code=xxxxx`
-        * `redirect_uri`
+* `grant_type=authorization_code`
+* `code=xxxxx`
+* `redirect_uri`
 
-        {% endmarkdown %}
-        <a href="/authorize" class="btn btn-primary">Try</a>
+{% endmarkdown %}
+        <a href="/authorization" class="btn btn-primary">Try</a>
       </div>
     </div>
   </div>
@@ -44,33 +44,78 @@
         PKCE for Native App
       </div>
       <div class="card-body">
-        {% markdown %}
-        ##### Request to `/authorize`
-        * `response_type=code`
-        * `client_id=xxxxxx`
-        * `redirect_uri=xxxxxxx`
-        * `scope=xxxxxxx`
-        * `state=xxxxxxx`
-        * `code_challenge=xxxxxxxxxxx`
-        * `code_challenge_method=plain | S256`
+{% markdown %}
+##### Request to `/authorize`
+* `response_type=code`
+* `client_id=xxxxxx`
+* `redirect_uri=xxxxxxx`
+* `scope=xxxxxxx`
+* `state=xxxxxxx`
+* `code_challenge=xxxxxxxxxxx`
+* `code_challenge_method=plain | S256`
 
-        ##### Generate `code_challenge`:
-        1. The client should first create a **code verifier**, which is a cryptographically random string using the the characters `A-Za-z0-9-._~`, between **43 and 128** characters long.
-        2. Use the code verifier to create a **code challenge**. For devices that can perform a SHA256 hash, hash the coder verifier, and then base64-url-encode the hash value. Clients that do not have the ability to perform a SHA256 hash are permitttedto use the plain code verifier string as the challenge.
-        3. `code_challenge` is `S256` if the client could permform SHA256 hash, otherwise `plain`.
+##### Generate `code_challenge`:
+he client first creates a `code_verifier` for each OAuth 2.0 Authorization Request, in the following manner:
+```
+code_verifier = random string using A-Za-z0-9-._~
+```
 
-        ##### Authorization Code Exchange
+minimum length of 43 characters and max length of 128 characters.
 
-        Post to `/token` with header `Authorization: Basic {client_id}:{client_secret}`
-        * `grant_type=authorization_code`
-        * `code`
-        * `redirect_uri`
-        * `client_id`
-        * `code_verifier`
+You can use a random number generator to create a 32-octet sequence. The octet sequence is then base64url-encoded to produce a 43-octet URL safe string to use as the `code_verifier`.
 
-        {% endmarkdown %}
+NOTE: base64url is not base64. See `utils/pkce.js` for details.
+
+The client then creates a `code_challenge` derived from `code_verifier` by using one of the following transformation on the code verifier:
+
+* `plain` code_challenge = code_verifier
+* `S256` code_challenge = BASE64URL-ENCODE(SHA256(ACSII(code_verifier)))
+
+This is how you do it in Node.js:
+1. Use `crypto.randomBytes()` to generate 32 bytes buffer;
+2. Base64url encode the buffer to string of length 43. This is the `code_verifier`;
+3. Use `crypto.createHash('sha256')` to create a hash of the above string. You get a buffer of 32 bytes.
+4. Base64url encode the buffer to a string of length 43. This is the `code_challenge`.
+
+##### Authorization Code Exchange
+
+Post to `/token` with header `Authorization: Basic {client_id}:{client_secret}`
+* `grant_type=authorization_code`
+* `code`
+* `redirect_uri`
+* `client_id`
+* `code_verifier`
+
+{% endmarkdown %}
 
         <a href="/pkce/authorize" class="btn btn-primary">Try</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        Client Credentials Grant
+      </div>
+      <div class="card-body">
+{% markdown %}
+#### Post directly to `/token` endpoint
+
+* `grant_type=client_credentials`
+* `scope` optional
+
+```
+POST /token HTTP/1.1
+Host: server.example.com
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+```
+
+{% endmarkdown%}
+        <a href="/client-credentials" class="btn btn-primary">Try</a>
       </div>
     </div>
   </div>
