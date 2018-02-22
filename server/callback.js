@@ -3,7 +3,6 @@ const qs = require('querystring');
 const Koa = require('koa');
 const Router = require('koa-router');
 const got = require('got');
-const render = require('../utils/render');
 const {client, states, endpoints} = require('./config');
 const router = new Router();
 

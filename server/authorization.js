@@ -1,14 +1,14 @@
 const debug = require('debug')('oauth:authorization');
 const Koa = require('koa');
 const Router = require('koa-router');
-const randomString = require('../utils/random-string');
+const genState = require('../utils/gen-state');
 const buildUrl = require('../utils/build-url');
 const {client, states, endpoints} = require('./config');
 
 const router = new Router();
 
 router.get('/', async (ctx, next) => {
-  const state = randStr();
+  const state = await genState();
 
   states.set(state, Date.now());
 

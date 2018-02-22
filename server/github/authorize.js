@@ -2,7 +2,7 @@ const debug = require('debug')('oauth:gh-authorize');
 const Koa = require('koa');
 const Router = require('koa-router');
 const render = require('../../utils/render');
-const randStr = require('../../utils/random-string');
+const getState = require('../../utils/gen-state');
 const buildUrl = require('../../utils/build-url');
 const client = require('./client');
 const {states} = require('../config');
@@ -13,7 +13,7 @@ const clientId = process.env.GH_CLIENT_ID;
 // Forward user request to Authorization Endpoint
 router.get("/", async function(ctx, next) {
 
-  const state = randStr();
+  const state = await genState();
 
   states.set(state, Date.now());
 
