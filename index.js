@@ -8,6 +8,7 @@ const home = require('./server/home');
 
 const callback = require('./server/callback');
 const authorization = require('./server/authorization');
+const clientCredentials = require('./server/client-credentials');
 const jwt = require('./server/jwt');
 const github = require('./server/github');
 const pkce = require('./server/pkce');
@@ -25,8 +26,11 @@ app.use(static(path.resolve(process.cwd(), 'node_modules')));
 app.use(static(path.resolve(process.cwd(), 'client')));
 
 router.use('/', home);
-router.use('/callback', callback);
 router.use('/authorization', authorization);
+router.use('/callback', callback);
+
+router.use('/client-credentials', clientCredentials);
+
 router.use('/jwt', jwt);
 router.use('/github', github);
 router.use('/pkce', pkce);
