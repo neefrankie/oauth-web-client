@@ -17,8 +17,6 @@
   },
   "homepage": "https://github.com/neefrankie/oauth-web-client#readme",
   "dependencies": {
-    "bootstrap": "^4.0.0",
-    "chance": "^1.0.13",
     "debug": "^3.1.0",
     "got": "^8.0.3",
     "koa": "^2.4.1",
@@ -27,11 +25,14 @@
     "koa-static": "^4.0.2",
     "lowdb": "^1.0.0",
     "marked": "^0.3.12",
+    "mime": "^2.2.0",
+    "node-fetch": "^2.0.0",
     "nunjucks": "^3.0.1",
     "nunjucks-markdown": "^2.0.1",
-    "popper.js": "^1.12.9"
+    "superagent": "^3.8.2"
   },
   "devDependencies": {
-    "ava": "^0.25.0"
+    "ava": "^0.25.0",
+    "bootstrap": "^4.0.0"
   }
 }
